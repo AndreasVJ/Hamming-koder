@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="nb">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Press+Start+2P&family=VT323&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/jpg" href="./bilder/richard_hamming_icon.ico" />
+    <title>Hamming koder</title>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAJD_DFx_Q6JPYbliurKOMh9mE6ty7-3HA",
+          authDomain: "hamming-code.firebaseapp.com",
+          projectId: "hamming-code",
+          storageBucket: "hamming-code.appspot.com",
+          messagingSenderId: "522140378067",
+          appId: "1:522140378067:web:a0ae43626f7615555d0526",
+          measurementId: "G-8476CR9TR9"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+
+</head>
+
+<body>
+    <div id="lordOfTheDivs">
+        <h1 id="title"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">Hamming-koder</a>
+        </h1>
+        <img id="svg" src="./bilder/mobiltelefon_white.svg" alt="">
+        <div class="paragraph" id="intro">
+            <p class="overtittel">Det fundamentale spørsmålet</p>
+            <p class="ptext">
+                Har du noen gang tenkt over hvordan en ripete dvd klarer å bli lest av riktig?
+                Eller har du noen gang sendt en melding på dårlig resepsjon, men riktig emoji har likevel kommet fram
+                til
+                bestevennen eller besteveninnen? <br> <br>
+                Ripene på dvd-en og avstanden mellom
+                telefonen på fjellet og mobiltårnet påvirker faktisk enerne og nullerene som blir avlest og avsendt. Så
+                med
+                mindre dvd-en er fullstendig oppskrapt eller telefonsignalet er fullstendig brutt, er det fortsatt mulig
+                å
+                nøyaktig dekode den originale dataen - en bit for bit kopi. Det er en hel haug med matematisk lureri som
+                gjør det mulig for oss å lagre data og, like viktig, sende data på en slik måte at den er upåvirket av
+                feil.
+                Faktisk, tar det ikke så mye lureri for å komme på èn måte å gjøre noe slikt på. Hvilken som helst fil,
+                enten det er et bilde, en video, et lydklipp, en tekstmelding eller noe kode, er i bunn og grunn bygd
+                opp av
+                en lang rekke med nuller og enerer. En måte for å korrigere en bit som blir flippet, altså gjort fra en
+                ener
+                til en nuller eller fra en nuller til en ener, vil være å lagre tre kopier av hver bit. Datamaskinen kan
+                så
+                sammenlikne de tre kopiene av hvert enkelt bit og velge ut fra majoriteten. Men dette betyr at man må
+                bruke
+                to tredjedeler av all lagring til redundans - i reserve. I tillegg er det ingen garanti for hva som
+                skjer
+                dersom mer enn et bit blir flippet. Spørsmålet blir da: <br> <br> <span
+                    style="font-style: italic; font-weight: 600;">
+                    "Hvordan kan man lage koder og metoder som gjør det mulig å rette på feil dersom de oppstår og på
+                    samme
+                    tid gi
+                    opp så lite lagring som overhodet mulig?" </span>
+            </p>
+        </div>
+
+        <div class="paragraph" id="historie">
+            <p class="overtittel">Historien bak:</p>
+            <div class="img"><img id="skiveSkinke" src="./bilder/richard_hamming.jpg" alt=""></div>
+            <p class="ptext" id="first-p">
+                Koder som gjør det mulig for mennesker og datamaskiner å rette på feil i koder kalles “selvrettende
+                koder”.
+                En slik kode var det en ung Richard Hamming som først oppfant. Da han jobbet for Bell labs på
+                1940-tallet,
+                arbeidet han blant annet på en nå eldgammel hullkortdatamaskin. Problemer oppstod da han forsøkte å
+                kjøre
+                programmene sine: datamaskinen leste noen ganger av feil. Med feil avlesning ville ikke programmene hans
+                kjøre som de skulle, og med begrenset tilgang til datamaskinen, forsøkte den frustrerte Hamming å finne
+                en
+                løsning.
+            </p>
+            <div id="fileTransfer"><img id="feil" src="./bilder/svg file.svg" alt=""></div>
+
+            <p class="ptext" id="second-p">Det er flere forskjellige måter å visuallisere og tenke på Hamming koder, men
+                vi
+                skal nå se på dem slik Hamming selv gjorde:</p>
+        </div>
+
+        <div class="paragraph" id="forklaring_matte">
+            <section>
+                <p class="overtittel">Hvordan fungerer hamming koder?</p>
+                <p class="ptext">La oss først se på et eksempelt; simpelt, men ikke for simpelt - en blokk med 16 biter.
+                    Vi nummererer posisjonene til hvert bit fra 0 til 15 og plasserer dem i et rutenett på 4x4. Av disse
+                    16 bitene kommer bare 11 til å bli brukt til lagring, hvor resten blir brukt som en slags redundans,
+                    også
+                    kjent som
+                    kontrollsiffer. Redundant her betyr ikke kopier av koden, siden det ikke er nok plass i et bit for
+                    noe
+                    slikt.
+                    Vi trenger derfor en smartere type rendundans, en som ikke legger til noe ny informasjon, men som er
+                    motstandsdyktig.
+                    I tillegg er det kanskje enkelt å tenke at disse fem bitene blir plassert i slutten av koden, men
+                    det å ha
+                    disse
+                    spesielle bitene plassert i posisjoner som er potenser av to gir oss muligheten til å gjøre noe
+                    ganske lurt
+                    mot slutten. Tegningen under viser koden <span>"1000</span><span>1101</span>111" plassert i et rutenett sammen med
+                    kontrollsifre.</p>
+                <div id="gridDiv" class="canvas"><canvas id="grid" class="visuell-forklaring"></canvas></div>
+                <p class="ptext">Som med alle selvrettende koder vil dette involvere to parter: en sender, som har i
+                    oppgave å
+                    bestemme
+                    disse fire bitene i en gitt melding, og en mottaker som har i oppgave å gjøre en slags sjekk på
+                    meldingen
+                    for så å
+                    rette opp eventuelle feil som har oppstått. I praksis refererer sender og mottaker i dette tilfelle
+                    til
+                    datamaskiner
+                    som sender data seg imellom og til programvare som kjører sjekkene.
+                    Men da blir det store spørsmålet: Hvordan velger man disse kontrollsifrene? Hvert kontrollsiffer har
+                    sitt
+                    eget område i koden. Disse områdene kan du se i animasjonen under. </p>
+                <div class="canvas" id="matteParity-canvas">
+                    <canvas class="visuell-forklaring" id="matematikkParity-canvas"></canvas>
+                </div>
+                <p class="ptext">Oppgaven til kontrollsifrene er å sørge for at summen av enere i sitt eget område er et
+                    partall. Det betyr at dersom området til kontrollsifferet gir et oddetall, må kontrollsifferet være
+                    1. Og i
+                    motsatt tilfelle må det være en 0. Hvis man mottar en kode med et område der dette ikke stemmer, vet
+                    man dermed at feilen vil
+                    ligge i dette området. Ved å se på hvert av de fire områdene kan vi bestemme den nøyaktige
+                    posisjonen feilen
+                    ligger på, og ved å flippe biten i denne posisjonen har man fikset feilen i koden.</p>
+            </section>
+
+
+            <section id="quizDiv">
+                <p class="overtittel">Quiz</p>
+                <p class="ptext">
+                    Koden under inneholder en feil. Denne feilen kan vi finne ved å svare på 4 enkle spørsmål.
+                    Trykk på "Start Quiz" for å se om du klarer det.
+                </p>
+                <div id="centerDivQuiz">
+                    <div id="quiz"><canvas id="quizCanvas"></canvas></div>
+
+                    <div id="quizButtons">
+                        <button id="startQuiz" onclick=startQuiz()>Start Quiz</button>
+                        <button id="yes" class="button" onclick=nextQuestion(true) style="display:none"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+                            </svg></button>
+                        <button id="no" class="button" onclick=nextQuestion(false) style="display:none"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                            </svg></button>
+                    </div>
+                    <p id="question"></p>
+                </div>
+            </section>
+
+            <section>
+                <p class="overtittel">Men hva med det første bittet?</p>
+                <p class="ptext">Dersom summen av enere i områdene til hvert eneste kontrollsiffer er et partall, vil
+                    feilmeldingen peke på den første biten. Dersom dette skjer antar man at koden er riktig, men det
+                    betyr også
+                    at denne biten ikke kan brukes til informasjon. Det man derimot kan bruke den til er enda et
+                    kontrollsiffer.
+                    Oppgaven til denne biten er å sørge for at summen av enere i absolutt hele koden er et partall. På
+                    denne
+                    måten kan man finne ut om det har oppstått mer enn 1 feil i koden. Hvis man først retter koden med å
+                    bruke
+                    metoden fra quizen, men så ser at summen av enere i den rettede koden ikke er et partall, betyr det
+                    at det
+                    har oppstått mer enn 1 feil. Hamming koder har dessverre ikke noe måte å fikse dette på, men da vet
+                    man i
+                    alle fall at koden ikke er gyldig.</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="hamming.js"></script>
+    <script src="graphics.js"></script>
+    <script src="drawGraphics.js"></script>
+    <script src="quiz.js"></script>
+
+</body>
+
+</html>
