@@ -1,2 +1,2 @@
 # hamming-koder  
-Skoleprosjekt 2021
+Skoleprosjekt 2021 https://hamming-code.web.app
