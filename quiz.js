@@ -1,3 +1,5 @@
+// ⚠️ Be aware, dangerous code ahead ⚠️
+
 const quizCanvas = document.getElementById("quizCanvas")
 const quizCtx = quizCanvas.getContext("2d")
 
